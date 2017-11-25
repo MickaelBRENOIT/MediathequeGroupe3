@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:with="localeLanguage=${#locale.language}" th:lang="${localeLanguage}">
+
+<head th:include="fragments/common :: [//head]" />
+
+<body>
+	<div th:replace="fragments/menu" ></div>
+
+	<div class="container">
+		<h1>Products list</h1>
+	    <a th:href="@{/product/create}">Create a new product</a>
+	    <ul>
+	    	<li th:each="product : ${products}">
+	    		<span th:text="${product.name}"></span>
+	    		<span th:text="${{product.price}}"></span><span> &euro;</span>
+	    		<span><a th:href="@{'/product/edit/' + ${product.id}}">edit</a></span>
+	    		<span><a th:href="@{/product/delete(id=${product.id})}">delete</a></span>
+	    	</li>
+	    </ul>
+    </div>
+    
+    <!-- Footer -->
+	<div th:replace="fragments/common :: [//div[@class='footer']]"></div>
+        
+    <!-- Scripts includes are placed at the end of the document so the pages load faster -->
+	<div th:replace="fragments/common :: [//div[@id='scripts']]"></div>	
+	
+</body>
+</html>
